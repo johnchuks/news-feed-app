@@ -1,0 +1,45 @@
+{
+  "name": "news-feed-app",
+  "version": "1.0.0",
+  "description": "news feed application",
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack-dev-server --content-base public --inline --hot",
+    "prod": "webpack --env.production",
+    "watch": "webpack -d --watch",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/johnchuks/news-feed-app.git"
+  },
+  "keywords": [
+    "api",
+    "react"
+  ],
+  "author": "Johnbosco Ohia",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/johnchuks/news-feed-app/issues"
+  },
+  "homepage": "https://github.com/johnchuks/news-feed-app#readme",
+  "dependencies": {
+    "axios": "^0.16.1",
+    "babel-loader": "^7.0.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
+    "react-router": "^4.1.1",
+    "webpack": "^2.4.1"
+  },
+  "devDependencies": {
+    "babel-core": "^6.24.1",
+    "babel-loader": "^7.0.0",
+    "babel-preset-env": "^1.4.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "webpack": "^2.4.1",
+    "webpack-dev-server": "^2.4.5"
+  }
+}
