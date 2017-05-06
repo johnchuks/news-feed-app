@@ -39,9 +39,6 @@ export default class Sources extends React.Component {
     console.log(this.state.searchString);
   }
 
-
-  
-
   render() {
     const searchString = this.state.searchString.trim().toLowerCase();
     let sources = this.state.sources;
