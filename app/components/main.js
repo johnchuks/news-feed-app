@@ -1,12 +1,16 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
+import ReactDOM from 'react-dom';
+import React from 'react';
+import Sources from './sources';
+import { HashRouter as Router, Route, Switch } from 'react-router-dom';
+import Home from './home';
+import Test from './test.jsx';
 
-class App extends React.Component {
-	render() {
-		return (<div>
-			Hello Github!
-			</div>)
-	}
-}
-
-ReactDOM.render(<App/>, document.getElementById('app'));
+ReactDOM.render((
+	<Router>
+		<Switch>
+		 <Route exact path='/' component={Home}/> 
+		 <Route path='/sources/:source/:sortBy' component={Test}/>
+		 <Route exact path='/sources' component={Sources}/>
+	    </Switch>
+	</Router>), 
+	document.getElementById('app'));

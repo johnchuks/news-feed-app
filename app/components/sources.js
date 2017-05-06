@@ -1,63 +1,72 @@
 import React from 'react';
-const axios = require('axios');
+import FeedStore from '../stores/NewsStore';
+import * as ActionSource from '../action/NewsAction';
+import TextField from 'material-ui/TextField';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import { Card, CardActions, CardTitle, CardText } from 'material-ui/Card';
+import FlatButton from 'material-ui/FlatButton';
+import Link  from 'react-router';
 
 
-function getNewsFeed() {
+export default class Sources extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      sources: [],
+      searchString: ' ' 
+    };
 
-	var encodedURI = window.encodeURI('https://newsapi.org/v1/sources?language=en');
-
-	return axios.get(encodedURI)
-	  .then((res) => {
-	  	return res;
-	  });
-
-}
-
-function newSource(props) {
-  return (
-	   <ul>
-		  {props.sour.map((news, index) => {
-			return (
-			<li> {news.sources[0].name} </li>
-				)
-			})}
-
-			</ul>
-	)
-}
-
-class Sources extends React.Component {
-
-	constructor(props) {
-		super(props);
-
-		this.state = ({sour:null});
-
-		this.updateNewsFeed = this.updateNewsFeed.bind(this);
-
-	}
-
-	componentDidMount() {
-		this.updateNewsFeed();
-	}
-
-	updateNewsFeed() {
-	   	getNewsFeed().then((result) => {
-			this.setstate({sour:result});
-	});
+    this.updateNewsFeed = this.updateNewsFeed.bind(this);
+    //this.getArticles = this.getArticles.bind(this);
+    //this.handleEventChange=this.handleEventChange.bind(this);
   }
-	
 
-	render() {
-		return (
-			<div>
-			<newSource sour={this.updateNewsFeed}/>
-			</div>
+  componentWillMount() {
+    ActionSource.getSources();
+    FeedStore.on("change", this.updateNewsFeed);
+  }
 
-			)
-	}
+  componentWillUnMount() {
+    FeedStore.removeListener("change", this.updateNewsFeed);
+  }
 
+  updateNewsFeed() {
+    this.setState({ sources:FeedStore.fetchSources() });
+  }
+
+  handleChange(event) {
+    this.setState({ searchString: event.target.value });
+    console.log(this.state.searchString);
+  }
+
+
+  
+
+  render() {
+    const searchString = this.state.searchString.trim().toLowerCase();
+    let sources = this.state.sources;
+
+
+    if (searchString.length > 0) {
+      sources = sources.filter((item) => {
+        return item.name.trim().toLowerCase().match(searchString);
+      });
+     }
+    console.log(sources);
+    return (
+        //<a href="#/sources/cnn"> Link to CNN </a> 
+       <MuiThemeProvider>
+         <div>
+         <TextField type="text" value={this.state.searchString} onChange={this.handleChange.bind(this)}  hintText="Search sources"/> <br/>
+           { sources.map((item, index) => {
+             return (
+               <Card>
+                 <CardText key ={index}><a href={`#/sources/${item.id}/${item.sortBysAvailable[0]}`}>{item.id}</a>{item.name}</CardText>    
+               </Card>
+             );
+           })};
+        </div>
+       </MuiThemeProvider>  
+    );  
+  }
 }
-export default Sources;
-
-
