@@ -20,8 +20,6 @@ export default class Sources extends React.Component {
     };
 
     this.updateNewsFeed = this.updateNewsFeed.bind(this);
-    //this.getArticles = this.getArticles.bind(this);
-    //this.handleEventChange=this.handleEventChange.bind(this);
   }
 
   componentWillMount() {
@@ -50,7 +48,11 @@ export default class Sources extends React.Component {
       sources = sources.filter((item) => {
         return item.name.trim().toLowerCase().match(searchString);
       });
-     }
+    }
+    if (typeof(searchString) === 'number') {
+      return 'Error Invalid Input'
+    }
+     
      const style2 = {
        textAlign: 'center'
      }

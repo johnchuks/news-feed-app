@@ -15,15 +15,15 @@ class Headlines extends React.Component {
       sortBy: this.props.match.params.sortBy,
       articles:[]
     };
-    this.updateNews = this.updateNews.bind(this);
+    this.updateArticles = this.updateArticles.bind(this);
   }
 
   componentWillMount() {
-    this.updateNews();
+    this.updateArticles();
   }
 
   componentWillUnMount() {
-    this.updateNews();
+    this.updateArticles();
   }
 
   updateNews() {
@@ -32,20 +32,23 @@ class Headlines extends React.Component {
        .then((res) => { 
         console.log('art',res.data.articles);
         this.setState({articles:res.data.articles}); 
-      })
+      }).catch('error');
 
   }
   render() {
   console.log('lib',this.state.sourceId);
   const style = {
       height:'300px',
-      width: '300px',
+      width: '400px',
       display:'block',
     };
     const style2 = {
       fontSize:20,
       margin: 'auto'
     };
+    const style3= {
+      margin: 20
+    }
     return (
       <MuiThemeProvider> 
        <div>
@@ -53,7 +56,7 @@ class Headlines extends React.Component {
       { this.state.articles.map((item, index) => {
              return (
                <Card>
-                 <CardText key ={index}><a href={item.url} target={'#'} style={style2}>{item.title}</a><br/><img src={item.urlToImage} style={style}></img><br/><p>{item.description}</p><br/>{'Published at:  '}{item.publishedAt}</CardText>    
+                 <CardText style={style3} key ={index}><a href={item.url} target={'#'} style={style2}>{item.title}</a><br/><img src={item.urlToImage} style={style}></img><br/><p>{item.description}</p><br/>{'Published at:  '}{item.publishedAt}</CardText>    
                </Card>
              ); 
       })}; 
