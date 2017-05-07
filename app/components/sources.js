@@ -4,9 +4,12 @@ import * as ActionSource from '../action/NewsAction';
 import TextField from 'material-ui/TextField';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Card, CardActions, CardTitle, CardText } from 'material-ui/Card';
-import FlatButton from 'material-ui/FlatButton';
+import RaisedButton from 'material-ui/RaisedButton';
 import Link  from 'react-router';
 
+const style = {
+  margin:17,
+};
 
 export default class Sources extends React.Component {
   constructor() {
@@ -43,22 +46,23 @@ export default class Sources extends React.Component {
     const searchString = this.state.searchString.trim().toLowerCase();
     let sources = this.state.sources;
 
-
     if (searchString.length > 0) {
       sources = sources.filter((item) => {
         return item.name.trim().toLowerCase().match(searchString);
       });
      }
+     const style2 = {
+       textAlign: 'center'
+     }
     console.log(sources);
     return (
-        //<a href="#/sources/cnn"> Link to CNN </a> 
        <MuiThemeProvider>
          <div>
-         <TextField type="text" value={this.state.searchString} onChange={this.handleChange.bind(this)}  hintText="Search sources"/> <br/>
+         <TextField style={style2} hintText="Search sources" type="text" value={this.state.searchString} onChange={this.handleChange.bind(this)} /><br/><br/><br/>
            { sources.map((item, index) => {
              return (
                <Card>
-                 <CardText key ={index}><a href={`#/sources/${item.id}/${item.sortBysAvailable[0]}`}>{item.id}</a>{item.name}</CardText>    
+                 <CardText key={item.id} style={style}>{item.name}<br/><br/>{item.description}<br/><br/><RaisedButton primary={true}><a href={`#/sources/${item.id}/${item.sortBysAvailable[0]}`}>{'Headlines'}</a></RaisedButton></CardText>    
                </Card>
              );
            })};

@@ -3,8 +3,11 @@ import * as api from './Api';
 import FeedStore from '../stores/NewsStore';
 import * as ActionSource from '../action/NewsAction';
 import axios from 'axios';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import { Card, CardActions, CardTitle, CardText } from 'material-ui/Card';
+import RaisedButton from 'material-ui/RaisedButton';
 
-class Test extends React.Component { 
+class Headlines extends React.Component { 
   constructor(props) {
     super(props);
     this.state = {
@@ -34,20 +37,32 @@ class Test extends React.Component {
   }
   render() {
   console.log('lib',this.state.sourceId);
+  const style = {
+      height:'300px',
+      width: '300px',
+      display:'block',
+    };
+    const style2 = {
+      fontSize:20,
+      margin: 'auto'
+    };
     return (
-      <div> 
+      <MuiThemeProvider> 
+       <div>
+       <h1>{'Top Stories'}</h1>
       { this.state.articles.map((item, index) => {
              return (
-               <ul>
-                 <li key ={index}>{item.description}</li>    
-               </ul>
+               <Card>
+                 <CardText key ={index}><a href={item.url} target={'#'} style={style2}>{item.title}</a><br/><img src={item.urlToImage} style={style}></img><br/><p>{item.description}</p><br/>{'Published at:  '}{item.publishedAt}</CardText>    
+               </Card>
              ); 
       })}; 
-     </div>
+      </div>
+     </MuiThemeProvider>
      )
   }
 }
 
-export default Test;
+export default Headlines;
 
 
