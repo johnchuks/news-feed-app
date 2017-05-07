@@ -6,6 +6,8 @@ import axios from 'axios';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Card, CardActions, CardTitle, CardText } from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
+import AppBar from 'material-ui/AppBar';
+
 
 class Headlines extends React.Component { 
   constructor(props) {
@@ -26,7 +28,7 @@ class Headlines extends React.Component {
     this.updateArticles();
   }
 
-  updateNews() {
+  updateArticles() {
     let url = `https://newsapi.org/v1/articles?source=${this.state.sourceId}&sortBy=${this.state.sortBy}&apiKey=213327409d384371851777e7c7f78dfe`;
      axios.get(url)
        .then((res) => { 
@@ -52,6 +54,10 @@ class Headlines extends React.Component {
     return (
       <MuiThemeProvider> 
        <div>
+        <AppBar
+          title="News Central"
+          iconClassNameRight="muidocs-icon-navigation-expand-more"
+          /><br/><br/>
        <h1>{'Top Stories'}</h1>
       { this.state.articles.map((item, index) => {
              return (

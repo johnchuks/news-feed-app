@@ -6,6 +6,8 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Card, CardActions, CardTitle, CardText } from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
 import Link  from 'react-router';
+import AppBar from 'material-ui/AppBar';
+
 
 const style = {
   margin:17,
@@ -60,6 +62,10 @@ export default class Sources extends React.Component {
     return (
        <MuiThemeProvider>
          <div>
+           <AppBar
+            title="News Central"
+             iconClassNameRight="muidocs-icon-navigation-expand-more"
+             /><br/><br/>
          <TextField style={style2} hintText="Search sources" type="text" value={this.state.searchString} onChange={this.handleChange.bind(this)} /><br/><br/><br/>
            { sources.map((item, index) => {
              return (
