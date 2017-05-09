@@ -8,7 +8,7 @@ import Headlines from './headlines.jsx';
 ReactDOM.render((
 	<Router>
 		<Switch>
-		 <Route exact path='/' component={Login}/> 
+		 <Route exact path='/' component={localStorage.username ? Sources : Login}/> 
 		 <Route path='/sources/:source/:sortBy' component={Headlines}/>
 		 <Route  exact path='/sources' component={Sources}/>
 	    </Switch>

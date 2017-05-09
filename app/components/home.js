@@ -17,8 +17,9 @@ export default class Login extends React.Component {
    	this.responseGoogle = this.responseGoogle.bind(this);
    }
   responseGoogle(response) {
-  	this.setState ({res:response})
-    console.log(response);
+  	const loginProfile = response.getBasicProfile();
+	localStorage.username = loginProfile.getName();
+	window.location = '/sources';
   }
  
    render () {
@@ -28,7 +29,7 @@ export default class Login extends React.Component {
    	   <AppBar
             title="News Central"
              iconClassNameRight="muidocs-icon-navigation-expand-more" iconElementRight={
-   	     <GoogleLogin
+   	    <GoogleLogin
     		clientId='116314004036-ogkinrg0ms586tvar5c56dam8a8gfrcn.apps.googleusercontent.com'
     		buttonText="Sign In With Google"
     		onSuccess={this.responseGoogle}

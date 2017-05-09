@@ -2,7 +2,7 @@ import React from 'react';
 import { expect } from 'chai';
 import { mount, shallow } from 'enzyme';
 
-import Sources from '..components/sources';
+import Sources from '../components/sources';
 
 describe('<Sources/>', () => {
     it ('Should have an initial source state',()=> {

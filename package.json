@@ -8,7 +8,7 @@
     "prod": "webpack --env.production",
     "watch": "webpack -d --watch",
     "build": "webpack",
-    "test": "mocha -w Tests/helpers/browser.js Tests/*.spec.js"
+    "test": "mocha -w --require Tests/helpers/browser.js --recursive Tests/*.spec.js"
   },
   "repository": {
     "type": "git",
