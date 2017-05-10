@@ -1,12 +1,7 @@
 import React from 'react';
-import * as api from './Api';
 import FeedStore from '../stores/NewsStore';
 import * as ActionSource from '../action/NewsAction';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import { Card, CardText } from 'material-ui/Card';
-import RaisedButton from 'material-ui/RaisedButton';
-import AppBar from 'material-ui/AppBar';
-
 
 class Headlines extends React.Component {
   constructor(props) {
@@ -18,76 +13,106 @@ class Headlines extends React.Component {
     };
 
     this.updateArticles = this.updateArticles.bind(this);
-    //this.sortByAvailable = this.sortByAvailable.bind(this);
+    this.UpdateSortByAvailables = this.UpdateSortByAvailables.bind(this);
+    this.updateLogout = this.updateLogout.bind(this);
+    
   }
 
   componentDidMount() {
-    ActionSource.newsHeadlines(this.state.sourceId, this.state.sortBy);
+    ActionSource.newsHeadlines(this.state.sourceId, '');
     FeedStore.on('change', this.updateArticles);
+  
   }
 
   componentWillUnMount() {
+    ActionSource.newsHeadlines(this.state.sourceId, '');
     FeedStore.removeListener('change', this.updateArticles);
   }
 
   updateArticles() {
     this.setState({
-      articles: FeedStore.fetchArticles(this.state.sourceId, this.state.sortBy),
+      articles: FeedStore.fetchArticles(),
     });
     console.log('art', this.state.articles);
-    // let url = `https://newsapi.org/v1/articles?source=${this.state.sourceId}&sortBy=${this.state.sortBy}&apiKey=213327409d384371851777e7c7f78dfe`;
-    //  axios.get(url)
-    //    .then((res) => {
-    //     console.log('art',res.data.articles);
-    //     this.setState({articles:res.data.articles});
-    //   }).catch('error');
   }
-  // sortByAvailable() {
-  //   const sortBy = this.state.sortBy;
-  //   for (let i = 0; i < sortBy.length; i++) {
-  //     if (sortBy[i] === 'Latest') {
-  //       ActionSource.newsHeadlines(this.state.sourceId, sortBy[i]);
-  //       FeedStore.on('change', this.updateArticles);
-  //     }
-  //   }
-  // }
+
+  updateLogout () {
+    localStorage.removeItem(localStorage.username);
+    localStorage.removeItem(localStorage.email);
+    window.location.href ='/';
+  }
+  UpdateSortByAvailables(e) {
+    const sortStatus = e.target.value;
+    if (sortStatus === 'top') {
+      ActionSource.newsHeadlines(this.state.sourceId, sortStatus);
+      FeedStore.on('change', this.updateArticles);
+    }
+    else if (sortStatus === 'latest') {
+      ActionSource.newsHeadlines(this.state.sourceId, sortStatus);
+      FeedStore.on('change', this.updateArticles);
+    }
+    console.log('button',sortStatus);
+    e.preventDefault();
+
+   
+ }
   render() {
-    console.log('lib', this.props.match.params);
-    const style = {
-      height: '300px',
-      width: '400px',
-      display: 'block',
+    console.log('lib', this.props);
+    const headingStyle = {
+      marginLeft: '190px',
     };
-    const style2 = {
-      fontSize: 20,
+    const buttonStyle = {
+      marginRight: '100px',
+      marginLeft: '180px',
+      justifyContent: 'space-around',
+    
+    };
+    const containerStyle = {
+      width: '900px',
+      height: '400px',
       margin: 'auto',
     };
-    const style3 = {
-      margin: 20,
-    };
+    
+    const links = this.state.sortBy.split(',').map(link  => (
+      <button  className="btn waves-effect waves-light" value={link} onClick={this.UpdateSortByAvailables} style={buttonStyle}>{link}</button>
+    ));
     return (
-      <MuiThemeProvider>
-        <div>
-          <AppBar
-            title="News Central"
-            iconClassNameRight="muidocs-icon-navigation-expand-more"
-          />
-          <br />
-          <br />
-          <h1>{'Top Stories'}</h1>
-        {/*<RaisedButton type='primary' label='sort by latest' onClick={this.sortByAvailable} />*/}
-          { this.state.articles.map((item, index) => {
-            return (
-              <Card>
-                <CardText style={style3} key={index}><a href={item.url} target={'#'} style={style2}>{item.title}</a>
-                <br /><img src={item.urlToImage} alt={item.title} style={style}></img><br /><p>{item.description}</p>
-                  <br />{'Published at:  '}{item.publishedAt}</CardText>    
-              </Card>
-           ); 
-          })}; 
+    <div>
+     <div>
+      <nav>
+        <div className="nav-wrapper">
+          <a href="#" className="brand-logo right">News Central</a>
+            <ul id="nav-mobile" className="right hide-on-med-and-down">
+          <li><a href="#" onClick={this.updateLogout}>Logout</a></li>
+          </ul>
+          </div>
+      </nav>
+      </div>
+       <div style={containerStyle}>
+          <h1 style={headingStyle}>{this.state.sourceId}{'  Headlines'}</h1><br /><br /><br />
+           {links}<br /><br /><br />
+          {this.state.articles.map((item, index) => (
+              <div className ='row'> 
+              <div className = 'col m12 s7'>
+                <div className ='card'>
+                <div className ='card-image'>
+                   <img src={item.urlToImage} alt={item.title} />
+                   <span className="card-title">{item.title}</span>
+              </div>
+                 <div className = 'card-content'>
+                   <p>{item.description}</p><br />{"Published at:  "}{item.publishedAt}
+                   </div>
+                   <div className='card-action'>
+                      <a href={item.url} target={"#"}>{'Read More'}</a>
+    
+              </div>
+              </div>
+              </div>
+              </div>
+            ))};
         </div>
-      </MuiThemeProvider>
-    );
+        </div>   
+    )
   }
 }
 
