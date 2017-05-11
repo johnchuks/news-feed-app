@@ -5,8 +5,8 @@ import Signout from './Header.jsx';
 
 
 export default class Sources extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       sources: [],
       searchString: '',
@@ -30,7 +30,6 @@ export default class Sources extends React.Component {
 
   handleChange(event) {
     this.setState({ searchString: event.target.value });
-    console.log(this.state.searchString);
   }
 
   render() {
@@ -38,42 +37,44 @@ export default class Sources extends React.Component {
     let sources = this.state.sources;
 
     if (searchString.length > 0) {
-      sources = sources.filter((item) => item.name.trim().toLowerCase().match(searchString));
+      sources = sources.filter(item => item.name.trim().toLowerCase().match(searchString));
     }
     if (typeof (searchString) === 'number') {
       return 'Error Invalid Input';
     }
-    const style2 = {
-      textAlign: 'center',
-    };
 
     return (
       <div>
         <Signout />
-           <h4>{'News Source'}</h4><br /><br />
-           <div className="row">
-             <div className="input-field col s12">
-                <input value={this.state.searchString} onChange={this.handleChange.bind(this)} type="text" placeholder ="Search Source" />
-              </div>
-           </div>
-           <br  /><br  /><br  />
-           { sources.map((item, index) => (
-                <div className ='row'>
-                  <div className = 'col m12 s7'>
-                     <div className ='card'>
-                         <span className='card-title'>{item.name}</span>
-                         <div className='card-content'>
-                           <p>{item.description}</p>
-                        </div>
-                        <div className='card-action'>
-                       <a href={`#/sources/${item.id}/${item.sortBysAvailable}`}>{'Headlines'}</a>
-                      </div>
-                    </div>
-                </div>
-            </div>
-             ))};
+        <h4>{'News Source'}</h4><br /><br />
+        <div className="row">
+          <div className="input-field col s12">
+            <input
+              value={this.state.searchString}
+              onChange={this.handleChange.bind(this)} type="text"
+              placeholder="Search Source"
+            />
+          </div>
         </div>
-
+        <br /><br /><br />
+        <div className="container">
+          <div className="row">
+            { sources.map(item => (
+              <div className="col m4">
+                <div className="card small grey lighten-4">
+                  <span className="card-title">{item.name}</span>
+                  <div className="card-content">
+                    <p>{item.description}</p>
+                  </div>
+                  <div className="card-action">
+                    <a href={`#/sources/${item.id}/${item.sortBysAvailable}`}>{'Headlines'}</a>
+                  </div>
+                </div>
+              </div>
+           ))};
+            </div>
+        </div>
+      </div>
     );
   }
 }

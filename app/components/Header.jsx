@@ -11,18 +11,17 @@ export default class Signout extends React.Component {
     window.location = '/';
   }
   render() {
-
     return (
       <div>
-       <nav>
-        <div className="nav-wrapper">
-          <div className="brand-logo center">News Central</div>
-          <ul id="nav-mobile" className="right hide-on-med-and-down">
+        <nav>
+          <div className="nav-wrapper">
+            <div className="brand-logo center">News Central</div>
+            <ul id="nav-mobile" className="right hide-on-med-and-down">
               <li><a href="/" onClick={this.updateLogout}>Logout</a></li>
             </ul>
-        </div>
-      </nav>
-     </div>
+          </div>
+        </nav>
+      </div>
     );
   }
 }

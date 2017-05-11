@@ -8,8 +8,6 @@ export function getSources() {
       data: sources,
     });
   });
-	
-	//console.log('action', source);
 }
 
 export function newsHeadlines(source, sortBy) {
@@ -18,8 +16,6 @@ export function newsHeadlines(source, sortBy) {
       type: 'GET_ARTICLES',
       data: articles,
     });
-    console.log('app', articles);
   });
 }
-
 
