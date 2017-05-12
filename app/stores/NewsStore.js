@@ -2,6 +2,11 @@ import { EventEmitter } from 'events';
 //import * as action from '../action/NewsAction';
 import Dispatcher from '../dispatcher/dispatcher';
 
+/**
+ *
+ * @class FeedStore
+ * @extends {EventEmitter}
+ */
 class FeedStore extends EventEmitter {
   constructor() {
     super();
@@ -9,6 +14,13 @@ class FeedStore extends EventEmitter {
     this.articles = [];
   }
 
+  /**
+   *
+   *
+   * @returns
+   *
+   * @memberof FeedStore
+   */
   fetchSources() {
     return this.sources;
   }
@@ -21,7 +33,7 @@ class FeedStore extends EventEmitter {
     switch (action.type) {
       case 'GET_SOURCES': {
         this.sources = action.data;
-        // console.log('hit', this.sources);
+        // console.log('hit', action.data.PromiseValue);
         this.emit('change');
         break;
       }

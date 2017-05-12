@@ -16,7 +16,7 @@ export default class Sources extends React.Component {
   }
 
   componentDidMount() {
-    ActionSource.getSources();
+   ActionSource.getSources();
     FeedStore.on('change', this.updateNewsFeed);
   }
 
@@ -36,6 +36,7 @@ export default class Sources extends React.Component {
   render() {
     const searchString = this.state.searchString.trim().toLowerCase();
     let sources = this.state.sources;
+    console.log('source', sources);
 
     if (searchString.length > 0) {
       sources = sources.filter(item => item.name.trim().toLowerCase().match(searchString));
@@ -46,7 +47,6 @@ export default class Sources extends React.Component {
     const NewsSource = sources.map(item => {
         let sortsArray = item.sortBysAvailable.toString();
         let sortsString = sortsArray.replace(',', '+');
-        console.log(sortsString);
       return <div className= "col m4" >
         <div className="card small grey lighten-4">
           <span className="card-title">{item.name}</span>
