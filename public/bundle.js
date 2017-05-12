@@ -12095,8 +12095,14 @@ var Login = function (_React$Component) {
       var userProfile = {};
       userProfile.name = loginProfile.getName();
       userProfile.email = loginProfile.getEmail();
+      userProfile.idToken = response.googleId;
       localStorage.setItem('userProfile', JSON.stringify(userProfile));
       window.location = '#/sources';
+    }
+  }, {
+    key: 'errorGoogle',
+    value: function errorGoogle(error) {
+      console.log('Oops something went wrong');
     }
   }, {
     key: 'render',
