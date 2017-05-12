@@ -50,13 +50,20 @@ class Headlines extends React.Component {
       marginRight: '100px',
       marginLeft: '180px',
       justifyContent: 'space-around',
-
+    };
+    const headerStyle = {
+      marginLeft: 350
+    };
+    const buttonAlign = {
+      marginLeft: 200
     };
     console.log(this.state.sortBy);
     // const containerStyle = {
     //   backgroundColor: '#FFFFCC',
     // };
-
+    const sourceName = this.state.sourceId;
+    let newsName = sourceName.toUpperCase().replace('-', ' ');
+    console.log(newsName);
     const links = this.state.sortBy.split('+').map(link => (
       <button id='sort' className="btn waves-effect waves-light" value={link}
         onClick={this.updateSortByAvailables} style={buttonStyle}
@@ -65,13 +72,18 @@ class Headlines extends React.Component {
     return (
       <div>
         <Signout />
-        <br />{links}<br /><br />
+
+        <br /><h4 style={headerStyle}>{newsName}{' Headlines'}<
+          /h4><br/><br />
+            <div style={buttonAlign}>
+            {links}
+            </div><br /><br />
 
         <div className="container">
           <div className="row">
             {this.state.articles.map((item) => (
               <div className="col m6">
-                <div className="card large grey lighten-4">
+                <div className="card small grey lighten-4">
                   <div className="card-image">
                     <img src={item.urlToImage} alt={item.title} />
                     <span className="card-title">{item.title}</span>

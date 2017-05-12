@@ -4,12 +4,14 @@
   "description": "news feed application",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack-dev-server --content-base public --inline --hot",
-    "prod": "webpack --env.production",
+    "dev": "./node_modules/.bin/webpack-dev-server --content-base public --inline --hot",
+    "prod": "./node_modules/.bin/webpack --env.production",
     "watch": "webpack -d --watch",
     "build": "webpack",
     "test": "nyc --reporter=html --reporter=text mocha mocha -w --compilers js:babel-register  app/Tests/*.spec.js",
-    "coverage": "nyc report --reporter=text-lcov | coveralls"
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
+    "start": "node server.js"
+
   },
   "repository": {
     "type": "git",
@@ -32,6 +34,7 @@
     "babel-preset-react": "^6.24.1",
     "chai": "^3.5.0",
     "eslint": "^3.19.0",
+    "express": "^4.15.2",
     "flux": "^3.1.2",
     "history": "^4.6.1",
     "material-ui": "^0.18.0",
@@ -66,6 +69,8 @@
     "react-test-renderer": "^15.5.4",
     "sinon": "^2.2.0",
     "webpack": "^2.4.1",
-    "webpack-dev-server": "^2.4.5"
+    "webpack-dev-middleware": "^1.10.2",
+    "webpack-dev-server": "^2.4.5",
+    "webpack-hot-middleware": "^2.18.0"
   }
 }

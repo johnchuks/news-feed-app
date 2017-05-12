@@ -11,11 +11,11 @@ export default class Signout extends React.Component {
     window.location = '/';
   }
   render() {
-    const headerStyle = {
-      marginTop: -45,
-    }
+    // const headerStyle = {
+    //   marginTop: -45,
+    // }
     return (
-      <div style={headerStyle}>
+      <div>
         <nav>
           <div className="nav-wrapper" >
             <div className="brand-logo center">News Central</div>
