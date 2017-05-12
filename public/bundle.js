@@ -8070,7 +8070,7 @@ var Signout = function (_React$Component) {
   _createClass(Signout, [{
     key: 'updateLogout',
     value: function updateLogout() {
-      localStorage.deleteItem('userProfile');
+      localStorage.removeItem('userProfile');
       window.location = '/';
     }
   }, {
