@@ -8076,12 +8076,9 @@ var Signout = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      var headerStyle = {
-        marginTop: -45
-      };
       return _react2.default.createElement(
         'div',
-        { style: headerStyle },
+        null,
         _react2.default.createElement(
           'nav',
           null,
