@@ -11,9 +11,6 @@ export default class Signout extends React.Component {
     window.location = '/';
   }
   render() {
-    // const headerStyle = {
-    //   marginTop: -45,
-    // }
     return (
       <div>
         <nav>
