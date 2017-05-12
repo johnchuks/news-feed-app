@@ -7,7 +7,7 @@ export default class Signout extends React.Component {
   }
 
   updateLogout() {
-    localStorage.deleteItem('userProfile');
+    localStorage.removeItem('userProfile');
     window.location = '/';
   }
   render() {
