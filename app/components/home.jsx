@@ -12,8 +12,13 @@ export default class Login extends React.Component {
     const userProfile = {};
     userProfile.name = loginProfile.getName();
     userProfile.email = loginProfile.getEmail();
-    localStorage.setItem('userProfile', JSON.stringify(userProfile));
-    window.location = '#/sources';
+    userProfile.idToken = response.googleId;
+      localStorage.setItem('userProfile', JSON.stringify(userProfile));
+      window.location = '#/sources';
+
+  }
+  errorGoogle(error) {
+    console.log('Oops something went wrong');
   }
 
   render() {
