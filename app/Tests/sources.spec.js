@@ -7,6 +7,15 @@ import Signout from '../components/Header';
 
 
 describe('<Sources/>', () => {
+  const props = {
+    sources: [{
+      id: 'abc-news-au',
+      description: 'We bring the best news from Australia',
+      name: 'ABC-NEWS-AUr'
+    }
+
+    ]
+  }
   const wrapper = shallow(<Sources />);
   it('Should have the signout component', () => {
     expect(wrapper.find(Signout)).to.have.length(1);

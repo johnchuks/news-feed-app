@@ -52,11 +52,12 @@ class Headlines extends React.Component {
       justifyContent: 'space-around',
 
     };
+    console.log(this.state.sortBy);
     // const containerStyle = {
     //   backgroundColor: '#FFFFCC',
     // };
 
-    const links = this.state.sortBy.split(',').map(link => (
+    const links = this.state.sortBy.split('+').map(link => (
       <button id='sort' className="btn waves-effect waves-light" value={link}
         onClick={this.updateSortByAvailables} style={buttonStyle}
       >{link}</button>

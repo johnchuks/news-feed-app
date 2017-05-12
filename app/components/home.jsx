@@ -24,6 +24,9 @@ export default class Login extends React.Component {
       marginTop: '150px',
       marginLeft: '450px',
     };
+    const headerStyle = {
+      marginTop: -45,
+    }
     const googleId = '116314004036-ogkinrg0ms586tvar5c56dam8a8gfrcn.apps.googleusercontent.com';
     return (
       <div>

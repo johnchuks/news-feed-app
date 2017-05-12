@@ -17,23 +17,18 @@ describe('<HeadLines />', () => {
   };
   const wrapper = shallow(<Headlines {...props} />);
   it('Should have the Signout component', () => {
-    const wrapper = shallow(<Headlines {...props} />);
     expect(wrapper.find(Signout)).to.have.length(1);
   });
   it('Should have a state for sortby', () => {
-    const wrapper = shallow(<Headlines {...props} />);
     expect(wrapper.state().sortBy).to.be.a('string');
   });
   it('Should have an initial sourceId state', () => {
-    const wrapper = shallow(<Headlines {...props} />);
     expect(wrapper.state().sourceId).to.be.a('string');
   });
   it('Should have a button to sort between top and latest', () => {
-    const wrapper = shallow(<Headlines {...props} />);
     expect(wrapper.find('button')).to.have.length(1);
   });
   it('Renders the headline component', () => {
-    const wrapper = shallow(<Headlines {...props} />);
     expect(wrapper.find('.container')).to.be.defined;
   });
   it('Should have a did mount function', () => {

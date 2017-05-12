@@ -11,10 +11,13 @@ export default class Signout extends React.Component {
     window.location = '/';
   }
   render() {
+    const headerStyle = {
+      marginTop: -45,
+    }
     return (
-      <div>
+      <div style={headerStyle}>
         <nav>
-          <div className="nav-wrapper">
+          <div className="nav-wrapper" >
             <div className="brand-logo center">News Central</div>
             <ul id="nav-mobile" className="right hide-on-med-and-down">
               <li><a href="/" onClick={this.updateLogout}>Logout</a></li>

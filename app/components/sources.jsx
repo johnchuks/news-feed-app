@@ -28,6 +28,7 @@ export default class Sources extends React.Component {
     this.setState({ sources: FeedStore.fetchSources() });
   }
 
+
   handleChange(event) {
     this.setState({ searchString: event.target.value });
   }
@@ -42,7 +43,24 @@ export default class Sources extends React.Component {
     if (typeof (searchString) === 'number') {
       return 'Error Invalid Input';
     }
+    const NewsSource = sources.map(item => {
+        let sortsArray = item.sortBysAvailable.toString();
+        let sortsString = sortsArray.replace(',', '+');
+        console.log(sortsString);
+      return <div className= "col m4" >
+        <div className="card small grey lighten-4">
+          <span className="card-title">{item.name}</span>
+          <div className="card-content">
+            <p>{item.description}</p>
+          </div>
+          <div className="card-action">
+            <a href={`#/sources/${item.id}/${sortsString}`}>{'Headlines'}</a>
+          </div>
+        </div>
+      </div >
 
+    });
+    console.log(NewsSource);
     return (
       <div>
         <Signout />
@@ -59,19 +77,7 @@ export default class Sources extends React.Component {
         <br /><br /><br />
         <div className="container">
           <div className="row">
-            { sources.map(item => (
-              <div className="col m4">
-                <div className="card small grey lighten-4">
-                  <span className="card-title">{item.name}</span>
-                  <div className="card-content">
-                    <p>{item.description}</p>
-                  </div>
-                  <div className="card-action">
-                    <a href={`#/sources/${item.id}/${item.sortBysAvailable}`}>{'Headlines'}</a>
-                  </div>
-                </div>
-              </div>
-           ))};
+            {NewsSource}
             </div>
         </div>
       </div>
