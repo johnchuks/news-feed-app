@@ -32,14 +32,12 @@ class FeedStore extends EventEmitter {
   handleAction(action) {
     switch (action.type) {
       case 'GET_SOURCES': {
-        this.sources = action.data;
-        // console.log('hit', action.data.PromiseValue);
+        this.sources = action.payLoad;
         this.emit('change');
         break;
       }
       case 'GET_ARTICLES': {
-        this.articles = action.data;
-        // console.log('fetch', this.action);
+        this.articles = action.payLoad;
         this.emit('change');
         break;
       }

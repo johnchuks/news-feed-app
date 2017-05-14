@@ -35,12 +35,7 @@ describe('<Sources/>', () => {
     wrapper.instance().componentDidMount();
   });
   it('Should have a component will unmount function', () => {
-   // expect(typeof wrapper.coponentWillUnmount()).toBe('function');
-    wrapper.instance().componentWillUnMount();
-  });
-
-  it('Should have a function that changes the state of the new sources', () => {
-    wrapper.instance().updateNewsFeed();
+    wrapper.instance().componentWillUnmount();
   });
   it('Should have a button that handles onClick event', () => {
     expect(wrapper.find('button')).to.be.defined;
@@ -51,6 +46,5 @@ describe('<Sources/>', () => {
   it('should have a textfield in the component for searching', () => {
     expect(wrapper.find('.input-field')).to.be.defined;
   });
-   //console.log(wrapper.handleChange());
 
 });
