@@ -16,16 +16,17 @@ export default class Sources extends React.Component {
   }
 
   componentDidMount() {
-    ActionSource.getSources();
+   ActionSource.getSources();
     FeedStore.on('change', this.updateNewsFeed);
   }
 
-  componentWillUnMount() {
+  componentWillUnmount() {
+    ActionSource.getSources();
     FeedStore.removeListener('change', this.updateNewsFeed);
   }
 
   updateNewsFeed() {
-    this.setState({ sources: FeedStore.fetchSources() });
+      this.setState({ sources: FeedStore.fetchSources() });
   }
 
 
@@ -37,6 +38,7 @@ export default class Sources extends React.Component {
     const searchString = this.state.searchString.trim().toLowerCase();
     let sources = this.state.sources;
 
+
     if (searchString.length > 0) {
       sources = sources.filter(item => item.name.trim().toLowerCase().match(searchString));
     }
@@ -46,7 +48,6 @@ export default class Sources extends React.Component {
     const NewsSource = sources.map(item => {
         let sortsArray = item.sortBysAvailable.toString();
         let sortsString = sortsArray.replace(',', '+');
-        console.log(sortsString);
       return <div className= "col m4" >
         <div className="card small grey lighten-4">
           <span className="card-title">{item.name}</span>
@@ -60,7 +61,6 @@ export default class Sources extends React.Component {
       </div >
 
     });
-    console.log(NewsSource);
     return (
       <div>
         <Signout />
@@ -81,6 +81,6 @@ export default class Sources extends React.Component {
             </div>
         </div>
       </div>
-    );
+    )
   }
 }

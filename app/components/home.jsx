@@ -12,8 +12,13 @@ export default class Login extends React.Component {
     const userProfile = {};
     userProfile.name = loginProfile.getName();
     userProfile.email = loginProfile.getEmail();
-    localStorage.setItem('userProfile', JSON.stringify(userProfile));
-    window.location = '#/sources';
+    userProfile.idToken = response.googleId;
+      localStorage.setItem('userProfile', JSON.stringify(userProfile));
+      window.location = '#/sources';
+
+  }
+  errorGoogle(error) {
+    console.log('Oops something went wrong');
   }
 
   render() {
@@ -45,12 +50,11 @@ export default class Login extends React.Component {
                 <span className="card-title">Welcome to News Central</span>
                 <p>To sign in with google click the Sign in button </p>
                 <div className="card-action">
-                  <GoogleLogin
+                  <GoogleLogin className="waves-effect waves-light btn"
                     clientId={googleId}
-                    buttonText="Sign In"
                     onSuccess={this.responseGoogle}
-                    onFailure={this.responseGoogle}
-                  />
+                    onFailure={this.errorGoogle}
+                  >{'Sign In With   '}<i className="fa fa-google-plus"></i></GoogleLogin>
                 </div>
               </div>
             </div>
