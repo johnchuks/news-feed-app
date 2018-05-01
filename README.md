@@ -1,1 +1,2 @@
-# news-application
+# News Feed application
+
