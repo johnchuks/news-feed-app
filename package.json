@@ -10,7 +10,9 @@
     "build": "webpack",
     "test": "nyc --reporter=html --reporter=text mocha mocha -w --compilers js:babel-register  app/Tests/*.spec.js",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
-    "start": "node server.js"
+    "start": "node server.js",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "repository": {
     "type": "git",
@@ -43,7 +45,8 @@
     "react-google-login": "^2.8.9",
     "react-router": "^4.1.1",
     "react-router-dom": "^4.1.1",
-    "webpack": "^2.4.1"
+    "webpack": "^2.4.1",
+    "snyk": "^1.189.0"
   },
   "devDependencies": {
     "axios-mock-adapter": "^1.8.1",
@@ -73,5 +76,6 @@
     "webpack-dev-middleware": "^1.10.2",
     "webpack-dev-server": "^2.4.5",
     "webpack-hot-middleware": "^2.18.0"
-  }
+  },
+  "snyk": true
 }
